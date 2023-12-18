@@ -11,20 +11,26 @@ public class FileIOExample {
 
 		BufferedReader fileReader = null;
 		try {
-			fileReader = new BufferedReader(new FileReader("date.txt"));
-			System.out.println(fileReader.toString());
+			fileReader = new BufferedReader(new FileReader("data.txt"));
+
+			String line;
+			while ((line = fileReader.readLine()) != null) {
+				System.out.println(line);
+			}
+
 		} catch (FileNotFoundException e) {
-			System.out.println("Oops, the file wasn't found!");
+			System.out.println("Oops, file wasn't found!");
 			e.printStackTrace();
-		}  finally {
+		} catch (IOException e) {
+			System.out.println("Oops, there was an I/O exception!");
+			e.printStackTrace();
+		} finally {
 			try {
 				System.out.println("Closing file reader.");
 				fileReader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 }
